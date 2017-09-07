@@ -1,0 +1,24 @@
+{
+  "name": "Semini",
+  "description": "",
+  "sitename" : "Semini",
+  "website" : "https://semini.herokuapp.com/",
+  "repo" : "https://github.com/Isithelo/Semini",
+  "scripts": {
+  },
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
