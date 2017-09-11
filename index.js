@@ -187,7 +187,11 @@ app.set('views', path.join(__dirname, 'plugins/fraternate/views/'));
 //Fratenate Routing
 var fraternateRouting = require('./plugins/fraternate/routes/routes');
 app.use('/', fraternateRouting);
- 
+ //Set Handlebars view directory for plugins
+app.set('views', path.join(__dirname, 'plugins/semini/views/'));
+//Fratenate Routing
+var seminiRouting = require('./plugins/semini/routes/routes');
+app.use('/', seminiRouting);
 
 
 /////////////////////////////

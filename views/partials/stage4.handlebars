@@ -1,0 +1,13 @@
+<div id='stage4'>
+  <h1>Stage 4 - Push the Navigation Editor Form.</h1>
+  <p>Create the default navigation form.</p>
+  <h3>Data Set</h3>
+  <textarea class="form-control" class="form-control " id="schema4" name="schema"  style="height: 250px">
+    {"name":"Navigation Menu", "detail":"Use for the creation of Navigation jstree structures.", "objectType":"form", "entry":{"options": {"form": {"buttons": {"submit": {"title": "Submit", "id": "submit", "click": ""} } }, "helper": "Use this form to add menu items to the navigation menu.", "fields": {"detail": {"type": "text", "rows": 4, "cols": 40, "helper": "All entry data is stored here.", "validate": true }, "objectType": {"type": "select"}, "revision": {"type": "select"}, "active": {"type": "select", "required": false }, "entry": {"type": "json", "rows": 4, "cols": 40, "helper": "All entry data is stored here.", "validate": false } }, "focus": ""}, "schema": {"title": "Navigation Menu", "type": "object", "properties": {"description": {"title": "Description"}, "value": {"title": "Value"}, "unit": {"title": "Unit"}, "detail": {"title": "Detail"}, "standard": {"title": "Standard"}, "parent": {"title": "Parent"}, "icon": {"title": "Icon"}, "template": {"title": "Template"}, "headings": {"title": "Headings", "enum": ["value", "detail"] } } } } }
+  </textarea>
+  <p></p>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" id="setData2">Set Form Data</button>
+    <p></p>
+  </div>
+</div>
