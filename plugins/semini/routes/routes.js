@@ -150,5 +150,12 @@ app.get('/getraw',   readController.getraw);//get the raw form.
 app.get('/jstree', readController.jstree);//get jstree 
 app.get('/templateload', readController.templateload);//Load Template
 app.get('/templatename', readController.templatename);//get the select templatename
+
+
+
+ 
+app.get('/getdatacomp', readController.getdatacomp);//get data by array of ids.
+app.get('/getform',  readController.getform);//search for the form to load.
+
 //last line
 module.exports = app;

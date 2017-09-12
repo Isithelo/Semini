@@ -442,27 +442,27 @@ switch (true) {
   temp = arr[index]['field']
   break;
 }
- if (!temp == undefined) {
+if (!temp == undefined) {
 
   arr[index]["dataSource"] = function(callback) {
-  
-  jQuery.ajax({
-    'async': true,
-    'global': false,
-    'url': '/getformfield?data='+temp ,
-    'success': function (dataSchemaObject) {
-      if (dataSchemaObject) {
-        var dataSchemaObject = JSON.parse(dataSchemaObject);
-        htmlPicker(dataSchemaObject,temp)
-        var tempVar =[]
-        for (var i = 0; i < dataSchemaObject.length; i++) {
-          tempVar.push(dataSchemaObject[i].entry[temp])
-        }
-        callback(tempVar);
-      }  
-    }
-  }); 
-}
+    
+    jQuery.ajax({
+      'async': true,
+      'global': false,
+      'url': '/getformfield?data='+temp ,
+      'success': function (dataSchemaObject) {
+        if (dataSchemaObject) {
+          var dataSchemaObject = JSON.parse(dataSchemaObject);
+          htmlPicker(dataSchemaObject,temp)
+          var tempVar =[]
+          for (var i = 0; i < dataSchemaObject.length; i++) {
+            tempVar.push(dataSchemaObject[i].entry[temp])
+          }
+          callback(tempVar);
+        }  
+      }
+    }); 
+  }
 }
 
 
@@ -552,7 +552,7 @@ switch(true){
   var html = ''
   html += '<div class="alert alert-danger" role="alert"> '
   html += '<strong>'
-  html += 'Oh snap!'
+  html += 'Oh Snap!'
   html += '</strong> '
   html += 'Form error , form usage type is not defined.'
   html += '</div>'
@@ -563,7 +563,7 @@ switch(true){
   var html = ''
   html += '<div class="alert alert-danger" role="alert"> '
   html += '<strong>'
-  html += 'Oh snap!'
+  html += 'Oh Snap!'
   html += '</strong> '
   html += 'Form error , This dataset is not a form , Please let us know about this.'
   html += '</div>'
@@ -719,7 +719,7 @@ switch(true){
   var html = ''
   html += '<div class="alert alert-danger" role="alert"> '
   html += '<strong>'
-  html += 'Oh snap!'
+  html += 'Oh Snap!'
   html += '</strong> '
   html += 'Form error , form usage type is not defined.'
   html += '</div>'
@@ -1009,7 +1009,7 @@ htmlcompile[indexOverwrite] = {
 }
 }); 
   } else {
-    var html = '<div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong> An error occured loading database information. Please let us know about this. </div>'
+    var html = '<div class="alert alert-danger" role="alert"> <strong>Oh Snap!</strong> An error occured loading database information. Please let us know about this. </div>'
     htmlcompile[indexOverwrite] = {
       'html' : html,
       'rawData' : htmldata,

@@ -355,6 +355,8 @@ $('#setData4').click(function(){
  var temp = JSON.parse($('#schema6').val())
  console.log(temp)
 //set the units paretn id to the forms page.
+ 
+temp.childType = forms[3]._id
 temp.parentid = forms[4]._id
 $("#form_"+formdata+idItem+formid1).alpaca('get').setValue(temp)
 })

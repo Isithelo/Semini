@@ -519,3 +519,217 @@ debugging(req,debugMode)
     }
   });
 }
+
+
+
+///////////////////////////////////////////////////
+////       DEPLOY THE HANDLEBARS FORM         //// 
+/////////////////////////////////////////////////
+exports.getform = function(req, res) {
+  //Debugging  
+debugging(req,debugMode)
+ if (req.user) {
+
+
+//Error trap and handling of form calls , all calls are based on Which form , using what data , any by editing self , editing raw or creating new.
+//Which id form to use.
+var formdata = req.param('formdata')
+if (!formdata) {
+  formdata =''
+}
+
+//Special heading for this form
+var headings = req.param('headings')
+if (!headings) {
+  headings =''
+}
+
+//Which id data to use.
+var idItem = req.param('idItem')
+if (!idItem) {
+  idItem =''
+}
+//Edit Self / Edit Raw or create new.
+var raw = req.param('raw')
+if (!raw) {
+  raw ='false'
+}
+//used for the database items which require a location from which the data was created.
+var parentid = req.param('parentid')
+if (!parentid || parentid=='') {
+  parentid ='false'
+}
+//used for the database items which require a location from which the data was created.
+var entry = req.param('entry')
+if (!entry) {
+  entry =''
+}
+//There is a requirement to limit the form size  , as such send the find and send the headings from the parent.
+var query1 = formModel.find(
+{
+  $and : 
+  [
+  {$or: [
+    {"elementID": parentid },
+    {"_id":  parentid }
+    ]}, 
+    {
+      "active": "true" 
+    }
+    ]
+  })
+
+query1.exec(function (err, parentItem) {
+  if(err){console.log('Error Here'); return;}
+//This is used to pull the first 2 entries from the database. 
+//will return the ids for the form data on the primer and raw database entry.
+formModel.find().limit(3).exec(function (err, forms) {
+  if(err){console.log('Error Here'); return;}
+  //The primer and Raw are the first 2 items in the database.
+  //This does mean the that the forms are not being edited.
+  switch(true){
+    case(raw == 'edit'):
+    formdata = forms[0]._id
+    break;
+    case(raw == 'raw' || raw == 'copyraw'):
+    formdata = forms[1]._id
+    break;
+    case(raw == 'self'):
+    formdata = forms[2]._id
+    break;    
+    case(forms.length == 1  ):
+    formdata = forms[0]._id
+    break;
+    case(forms.length == 2  ):
+    formdata = forms[1]._id
+    break;
+  }
+/////////////////////////////
+////      DEBUG         //// 
+///////////////////////////
+/*
+console.log('-----------getform------------')
+console.log('formdata : ',JSON.stringify(formdata))
+console.log('idItem : ',JSON.stringify(idItem))
+console.log('parentid :' ,JSON.stringify(parentid))
+console.log('raw :',JSON.stringify(raw))
+console.log('parentItem :',JSON.stringify(parentItem[0]))
+console.log('headings :',headings)
+console.log('entry :',entry)
+console.log('-----------getform------------')*/
+/////////////////////////////
+////      DEBUG         //// 
+///////////////////////////
+
+console.log('///////////////////////////////ADDITIONAL DETAIL MIDDLEWARE///////////////////////////////////')
+console.log(req.additionaldetails)
+console.log('///////////////////////////////ADDITIONAL DETAIL MIDDLEWARE///////////////////////////////////')
+
+res.render(directory+'form', {
+  title: 'Form',
+  formdata : JSON.stringify(formdata),
+  idItem : JSON.stringify(idItem),
+  parentid : JSON.stringify(parentid),
+  headings : headings,
+  raw :JSON.stringify(raw) ,
+  parentItem : JSON.stringify(parentItem[0]) ,
+  entry : entry, 
+  
+  query2 : req.additionaldetailsParse ,
+  layout: false,
+});
+});
+});
+} else {
+  res.send('<div class="alert alert-danger" role="alert"><strong>On Snap!</strong> You have been logged out. <a href="/signin" >Sign in.</a></div>')
+}
+
+}
+
+
+////////////////////////////////////////////////////
+////       GET FORM AND DATA | ONLY FORM       //// 
+//////////////////////////////////////////////////
+exports.getdatacomp = function(req, res) {
+  //Debugging  
+debugging(req,debugMode)
+//Which id form to use.
+var formdata = req.param('formdata')
+if (!formdata) {
+  formdata =''
+}
+//Which id data to use.
+var idItem = req.param('idItem')
+if (!idItem) {
+  idItem =formdata
+}
+//Edit Self / Edit Raw or create new.
+var raw = req.param('raw')
+if (!raw) {
+  raw ='false'
+}
+
+//Find the data to be viewed on the form.
+var query1 = formModel.find(
+{
+  $and : 
+  [
+  {$or: [
+    {"elementID": idItem },
+    {"_id":  idItem }
+    ]}, 
+    {
+      "active": "true" 
+    }
+    ]
+  })
+/////////////////////////////
+////      DEBUG         //// 
+///////////////////////////
+/*
+console.log('-----------getdatacomp------------')
+console.log('formdata : ',JSON.stringify(formdata))
+console.log('idItem : ',JSON.stringify(idItem))
+console.log('raw :',JSON.stringify(raw))
+console.log('-----------getdatacomp------------')
+*/
+/////////////////////////////
+////      DEBUG         //// 
+///////////////////////////
+//find all of the parentid equal .
+formModel.find({
+  'parentid' : formdata,
+  'active' : 'true'
+}).exec(function (err, form) {
+  if(err){console.log('Error Here'); return;} 
+  query1.exec(function (err, docs2) {
+    if(err){console.log('Error Here'); return;}
+    var temp = docs2[0] 
+      //if the entry id is blank then autopopulate the entry ID with the current ID.
+      if (docs2[0].elementID == '' ) {
+        docs2[0].elementID = docs2[0]._id
+        docs2[0].revision = 'updated'
+      }
+      if (docs2.length == 0) {
+        temp=''
+      }
+      for (var i = 0; i < form.length; i++) {
+      //the menu item elementid should arrive poulated to avoid confusion.
+      if(form[i].elementID==''){
+        form[i].elementID=form[i]._id
+      }
+    }
+//turn into something that alpaca understands.
+/*
+console.log('-----------getdatacomp------------')
+console.log('form : ',JSON.stringify(form))
+console.log('-----------getdatacomp------------')
+*/
+res.send({
+  formdata : form , 
+  idItem : temp
+});
+})
+})
+}
+ 
