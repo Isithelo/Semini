@@ -128,6 +128,8 @@ var readController = require(directory+'controllers/read');
 
 ///////////////////////////   THESE ROUTES CAN BE REMOVED FOR CUSTOM SITES   ///////////////////////////
 var seminiController = require(directory+'controllers/seminipages'); 
+
+
 /////////////////////////////////
 ////       TEMPALTES        //// 
 ///////////////////////////////
@@ -142,6 +144,7 @@ app.get('/delete', seminiController.delete);
 ///////////////////////////////////////
 app.post('/createform', creatController.createform);
 app.get('/getdata', readController.getdata);//get data by array of ids.
+
 /////////////////////////////////////////
 ////       READ CONTROLLERS         //// 
 ///////////////////////////////////////

@@ -166,12 +166,13 @@ if (!raw) {
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
-//console.log('-----------getdata------------')
-//console.log('formdata : ',JSON.stringify(formdata))
-//console.log('idItem : ',JSON.stringify(idItem))
-//console.log('raw :',JSON.stringify(raw))
-//console.log('-----------getdata------------')
-//console.log('formdata : ',formdata)
+console.log('-----------getdata------------')
+console.log('formdata : ',JSON.stringify(formdata))
+console.log('idItem : ',JSON.stringify(idItem))
+console.log('raw :',JSON.stringify(raw))
+console.log('formdata : ',formdata)
+console.log('-----------getdata------------')
+
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
@@ -209,13 +210,20 @@ query.exec(function (err, docs1) {
     if(err){console.log('Error Here Query 1'); return;}
     var temp = docs2[0] 
       //if the entry id is blank then autopopulate the entry ID with the current ID.
-      if (docs2[0].elementID == ''   ) {
-        docs2[0].elementID = docs2[0]._id
-        docs2[0].revision = 'updated'
+      if (docs2[0]) {
+        if (docs2[0].elementID == ''   ) {
+          docs2[0].elementID = docs2[0]._id
+          docs2[0].revision = 'updated'
+        }
+        if (docs2.length == 0) {
+          temp=''
+        }
+      } else {
+        console.log('-----------MISSING FORM DATA------------')
+        console.log('No form childType has been defined , and as such no form will be able to load.')
+        console.log('-----------MISSING FORM DATA------------')
       }
-      if (docs2.length == 0) {
-        temp=''
-      }
+
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
@@ -284,7 +292,7 @@ exports.jstree = function(req, res) {
 ////////////////////////////////////////////////////
 exports.templateload = function(req, res) {
   //Debugging  
-debugging(req,debugMode)
+  debugging(req,debugMode)
 
 //Which id data to use.
 var ids = req.param('ids')
@@ -313,7 +321,7 @@ var query = formModel.findOne(
     }
     ]
   })
- 
+
 query.exec(function (err, query_return) {
  if(err){console.log('Error Here'); return;}
  if (query_return.childType) {
@@ -391,20 +399,20 @@ var query5 = formModel.findOne(
     }
     ]
   })
- 
+
 query1.exec(function (err, query1_return) {
   if(err){
     console.log('No Child item'); 
   } 
- 
+
   query2.exec(function (err, query2_return) {
     if(err){
       console.log('No Child item'); 
     } 
-  
+
     query3.exec(function (err, query3_return) {
       if(err){console.log('Error Here'); return;} 
-     
+
       query4.exec(function (err, query4_return) {
         if(err){
           console.log('No Child item'); 
@@ -412,7 +420,7 @@ query1.exec(function (err, query1_return) {
         
         query5.exec(function (err, query5_return) {
           if(err){
-          
+
             var template= 'formtable'
           } 
           
@@ -468,7 +476,7 @@ query1.exec(function (err, query1_return) {
   console.log('ids',ids)
   console.log('childitem',childitem)
   console.log('//  Debug from here  //')
-*/
+  */
 
   if (query_return.entry.template) {
     template = query_return.entry.template
@@ -508,7 +516,7 @@ query1.exec(function (err, query1_return) {
 /////////////////////////////////////////////////
 exports.templatename = function(req, res) {
   //Debugging  
-debugging(req,debugMode)
+  debugging(req,debugMode)
   var template = req.param('template') 
   res.render(directory+'/tools/'+template, {layout:false}, function(err, html) {
     if(err) {
@@ -527,8 +535,8 @@ debugging(req,debugMode)
 /////////////////////////////////////////////////
 exports.getform = function(req, res) {
   //Debugging  
-debugging(req,debugMode)
- if (req.user) {
+  debugging(req,debugMode)
+  if (req.user) {
 
 
 //Error trap and handling of form calls , all calls are based on Which form , using what data , any by editing self , editing raw or creating new.
@@ -621,10 +629,6 @@ console.log('-----------getform------------')*/
 ////      DEBUG         //// 
 ///////////////////////////
 
-console.log('///////////////////////////////ADDITIONAL DETAIL MIDDLEWARE///////////////////////////////////')
-console.log(req.additionaldetails)
-console.log('///////////////////////////////ADDITIONAL DETAIL MIDDLEWARE///////////////////////////////////')
-
 res.render(directory+'form', {
   title: 'Form',
   formdata : JSON.stringify(formdata),
@@ -634,7 +638,6 @@ res.render(directory+'form', {
   raw :JSON.stringify(raw) ,
   parentItem : JSON.stringify(parentItem[0]) ,
   entry : entry, 
-  
   query2 : req.additionaldetailsParse ,
   layout: false,
 });
@@ -652,7 +655,7 @@ res.render(directory+'form', {
 //////////////////////////////////////////////////
 exports.getdatacomp = function(req, res) {
   //Debugging  
-debugging(req,debugMode)
+  debugging(req,debugMode)
 //Which id form to use.
 var formdata = req.param('formdata')
 if (!formdata) {
@@ -732,4 +735,3 @@ res.send({
 })
 })
 }
- 

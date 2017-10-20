@@ -31,14 +31,10 @@ exports.forms = function(req, res) {
   query1.exec(function (err, results) {
     if(err){console.log('Error Here'); return;}
     if (results.length >=6) {
-     var ids = results[4]._id
-     var Formids = results[3]._id
-
-
-    var ids = results[4]._id
-    var Formids = results[3]._id
-
-
+      var ids = results[4]._id
+      var Formids = results[3]._id
+      var ids = results[4]._id
+      var Formids = results[3]._id
      res.render('../../../plugins/semini/views/forms', {
       pagetitle: 'Forms | '+sitename ,
       items : JSON.stringify(ids),

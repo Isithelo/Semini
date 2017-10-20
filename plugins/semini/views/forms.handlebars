@@ -1,12 +1,18 @@
 <div class="row">
   <div class="col-md-6">
     <h1>Forms</h1>
-    <p>Use the interface below to modify all site forms.</p> <hr>
+    <p>Use the interface below to modify all site forms.</p>
   </div>
-</div>  
+  <div class="col-md-6" style="text-align: right">
+  <div class="btn-group" role="group" aria-label="...">
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="newMenuItem()" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a  class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModal" onclick="editRaw()" title="Edit this item raw"><i class="fa fa-file-code-o" aria-hidden="true"></i></a>
+</div>
+    
+  </div>  
+  
+</div>  <hr>
 <div class="row" id="page">
-
-
   <div class="col-md-4" id="navMenuPanel">
     <div id="myProgress">
       <div id="myBar"> </div>
@@ -26,9 +32,7 @@
     <div style="border-width: 2px; border-style: dashed; border-color: grey;padding:55px;text-align: center;border-radius: 5px;"><strong> Heads up!</strong> Click on the nodes of the navigation tree to interact with the site.</div>
   </div>
 </div>
-
 </div>
- 
 
 <script type="text/javascript">
 
@@ -51,9 +55,6 @@ console.log( 'temp : ',temp )
 console.log( '-------------------------' )
 console.log( 'forms loading' )
 
-
-
-
 /////////////////////////////////// 
 //////  GET JSTREE BY ID    //////
 ///////////////////////////////// 
@@ -63,8 +64,8 @@ function jstreeGet(ids){
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
-       var dataSchemaObject = JSON.parse(dataSchemaObject)
-       console.log(dataSchemaObject)
+     var dataSchemaObject = JSON.parse(dataSchemaObject)
+     console.log(dataSchemaObject)
       //Add the headings to the page.
       $('#descriptions').html(dataSchemaObject.thisitem[0].name)
       $('#details').html(dataSchemaObject.thisitem[0].detail)
@@ -78,8 +79,8 @@ function jstreeGet(ids){
       //change the primary page id variable , used for the parent
       databaseid = ids
       loadNavMenu(locations,jsTreeData)
-  }
-});
+    }
+  });
 }
 
 function fitstFormat(databaseMenu){
@@ -230,27 +231,18 @@ jQuery('#'+locations)
       }
     })
 
-//////////////////////////////////////////////
-////////    BUTTON CLICK OPEN FORM  /////////
-////////////////////////////////////////////
-$('#newMenuItem').click(function(){
-  //var temp = jQuery('#'+locations).jstree("get_selected",true)
-  //console.log(temp[0].id)
-  newMenuItems(Formids,'','use',databaseid,'',navmenuHeadings)
-})
 
+    console.log('Admin Page')
+    console.log('---------------------------')
+    console.log(' databaseid :', databaseid )
+    console.log(' Formids :', Formids )
+    console.log(' navmenuHeadings :', navmenuHeadings )
+    console.log(' databaseMenu :', databaseMenu )
+    console.log(' temp :', temp )
+    console.log('---------------------------')
+    console.log('Admin Page')
 
-console.log('Admin Page')
-console.log('---------------------------')
-console.log(' databaseid :', databaseid )
-console.log(' Formids :', Formids )
-console.log(' navmenuHeadings :', navmenuHeadings )
-console.log(' databaseMenu :', databaseMenu )
-console.log(' temp :', temp )
-console.log('---------------------------')
-console.log('Admin Page')
-
-}
+  }
 
 ///////////////////////////////////////////////////////
 ////////  EVENT LISTNER FUNCTION AREA DATABASE ///////
@@ -299,7 +291,6 @@ function collapse() {
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////
 function newMenuItems(formdata,idItem,raw,parentid,injectParentid,headings){
-  console.log(formdata,idItem,raw,parentid,injectParentid,headings)
   var headings = JSON.stringify(headings)
   jQuery.ajax({
     'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid+'&headings='+headings,
@@ -310,5 +301,20 @@ function newMenuItems(formdata,idItem,raw,parentid,injectParentid,headings){
     }
   });
 }
+
+////////////////////////////////////////////////////
+////////    BUTTON CLICK ADD NEW DB ITEM  /////////
+//////////////////////////////////////////////////
+function newMenuItem(parentid){
+  newMenuItems(Formids,'','use',databaseid,'',navmenuHeadings)
+}
+
+///////////////////////////////////////////////////
+////////    BUTTON CLICK EDIT RAW DB ITEM  ///////
+//////////////////////////////////////////////////
+function editRaw(parentid){
+  newMenuItems(Formids,databaseid,'raw',databaseid,'',navmenuHeadings)
+}
+
 </script>
 

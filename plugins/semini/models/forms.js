@@ -12,6 +12,7 @@ var forms = mongoose.Schema({
 'childType' :String,				//Used for the routing of new posts
 'route' :String,
 'entry' :Schema.Types.Mixed,
+'collectionName':String,
 'parentid' :String,
 'name' :String,
 'visibility' : String,				//Defines if this is publicly visibile
