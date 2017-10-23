@@ -615,7 +615,7 @@ formModel.find().limit(3).exec(function (err, forms) {
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////
-/*
+ 
 console.log('-----------getform------------')
 console.log('formdata : ',JSON.stringify(formdata))
 console.log('idItem : ',JSON.stringify(idItem))
@@ -624,7 +624,7 @@ console.log('raw :',JSON.stringify(raw))
 console.log('parentItem :',JSON.stringify(parentItem[0]))
 console.log('headings :',headings)
 console.log('entry :',entry)
-console.log('-----------getform------------')*/
+console.log('-----------getform------------') 
 /////////////////////////////
 ////      DEBUG         //// 
 ///////////////////////////

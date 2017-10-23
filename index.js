@@ -182,11 +182,16 @@ app.locals.repo = repo
 ///////////////////////////////
 ////       ROUTING        //// 
 /////////////////////////////
+
+
+//FRATERNATE
 //Set Handlebars view directory for plugins
 app.set('views', path.join(__dirname, 'plugins/fraternate/views/'));
 //Fratenate Routing
 var fraternateRouting = require('./plugins/fraternate/routes/routes');
 app.use('/', fraternateRouting);
+
+//SEMINI
  //Set Handlebars view directory for plugins
 app.set('views', path.join(__dirname, 'plugins/semini/views/'));
 //Fratenate Routing

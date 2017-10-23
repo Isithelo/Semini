@@ -45,7 +45,7 @@ var WYSIWYG = []
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
-console.log( 'form loading' )
+console.log( 'Tempalte Name : plugins/semini/views/form' )
 console.log( '-------------------------' )
 console.log( 'formdata :',formdata )
 console.log( 'idItem :',idItem )
@@ -61,7 +61,7 @@ console.log( 'entry :',entry )
 var entry
 {{/if}}
 console.log( '-------------------------' )
-console.log( 'form loading' )
+console.log( 'Tempalte Name : plugins/semini/views/form' )
 ////////////////////////////////////
 ////        DEBUG AREA         //// 
 //////////////////////////////////
@@ -101,7 +101,7 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////////
 function getdatacomp(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/forms/getdatacomp?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -118,7 +118,7 @@ function getdatacomp(formdata,idItem,raw){
 ///////////////////////////////////////
 function getdata(formdata,idItem,raw){
   jQuery.ajax({
-    'url': '/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
+    'url': '/forms/getdata?formdata='+formdata+'&idItem='+idItem+'&raw='+raw,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
@@ -492,7 +492,7 @@ if (!temp == undefined) {
     jQuery.ajax({
       'async': true,
       'global': false,
-      'url': '/getformfield?data='+temp ,
+      'url': '/forms/getformfield?data='+temp ,
       'success': function (dataSchemaObject) {
         if (dataSchemaObject) {
           var dataSchemaObject = JSON.parse(dataSchemaObject);

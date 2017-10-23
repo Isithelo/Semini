@@ -30,15 +30,21 @@ $('document').ready(function(){
   }
   var headings = ["description","detail","icon","headings"]
   var entry =''
-  loadformModal1(parentIdTemp,'','component',items.parentid,headings,entry)
+  loadtableformdisplay(parentIdTemp,'','component',items.parentid,headings,entry)
 })  
+
+
+console.log( 'Tempalte Name : plugins/semini/views/tools/form' )
+console.log( '-------------------------' )
+console.log( '-------------------------' )
+console.log( 'Tempalte Name : plugins/semini/views/tools/form' )
 
 //////////////////////////////////////
 ////////    GET FORM BY ID  /////////
 ////////////////////////////////////                                                                                                              
-function loadformModal1(formdata,idItem,raw,parentid){
+function loadtableformdisplay(formdata,idItem,raw,parentid){
   jQuery.ajax({
-    'url': '/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid,
+    'url': '/forms/getform?formdata='+formdata+'&idItem='+idItem+'&raw='+raw+'&parentid='+parentid,
     'async': true,
     'global': false,
     'success': function (dataSchemaObject) {
