@@ -735,3 +735,41 @@ res.send({
 })
 })
 }
+
+
+
+//////////////////////////////////////////
+///////////   READ  GROUPS  /////////////
+////////////////////////////////////////
+exports.groups = function(req, res) {
+  //Debugging  
+debugging(req,debugMode)
+  formsModel.
+  find({
+    'entry.parent' :req.param('data'),
+    'active' : 'true'
+  }).
+  exec(function (err, docs1) {
+    if(err){console.log('Error Here'); return;}   
+
+
+    if(docs1){
+      for (var i = 0; i < docs1.length; i++) {
+        //the menu item elementid should arrive poulated to avoid confusion.
+        if(docs1[i].elementID==''){
+          docs1[i].elementID=docs1[i]._id
+        }
+      }
+    } else {
+      console.log('docs1 failed')
+    } 
+
+
+/*
+console.log('-----------groups------------')
+console.log('docs1 : ',JSON.stringify(docs1))
+console.log('-----------groups------------')
+*/
+res.send(JSON.stringify(docs1));
+});
+}
