@@ -50,4 +50,93 @@ exports.forms = function(req, res) {
 })
 }; 
 
- 
+ //////////////////////////////////
+/////  PRIVACY STATEMENT    ///// 
+////////////////////////////////
+exports.privacy = function(req, res) {
+  res.render('../../../views/privacy-statement',{
+    pagetitle: 'Privacy | '+sitename+'',
+  })
+}; 
+
+//////////////////////////////////
+/////  TERMS STATEMENT    ///// 
+////////////////////////////////
+exports.terms = function(req, res) {
+  res.render('../../../views/terms-of-service',{
+    pagetitle: 'Terms of Service | '+sitename+'',
+  })
+}; 
+
+//////////////////////
+/////  INTRO    ///// 
+////////////////////
+exports.introduction = function(req, res) {
+  res.render('../../../views/introduction',{
+    pagetitle: 'An Intro | '+sitename+'',
+  })
+}; 
+
+////////////////////////////////
+/////  TROUBLESHOOTING    ///// 
+//////////////////////////////
+exports.troubleshooting = function(req, res) {
+  res.render('../../../views/troubleshooting',{
+    pagetitle: 'Troubleshooting | '+sitename+'',
+  })
+}; 
+
+/////////////////////////////
+/////  INSTALLATION    ///// 
+///////////////////////////
+exports.installation = function(req, res) {
+  res.render('../../../views/installation',{
+    pagetitle: 'Installation | '+sitename+'',
+  })
+};
+
+//////////////////////////
+/////  PAYMENTS     ///// 
+////////////////////////
+exports.payments = function(req, res) {
+  res.render('../../../views/payments',{
+    pagetitle: 'Payments | '+sitename+'',
+  })
+};
+
+/////////////////////////////
+/////  INTEGRATION     ///// 
+///////////////////////////
+exports.integration = function(req, res) {
+  res.render('../../../views/integration',{
+    pagetitle: 'Integration | '+sitename+'',
+  })
+};
+
+/////////////////////////////
+/////  LICENCE         ///// 
+///////////////////////////
+exports.licence = function(req, res) {
+  res.render('../../../views/licence',{
+    pagetitle: 'Licence | '+sitename+'',
+  })
+};
+
+/////////////////////////////////
+/////  SPECIFICATIONS      ///// 
+///////////////////////////////
+exports.specifications = function(req, res) {
+  res.render('../../../views/specifications',{
+    pagetitle: 'Specifications | '+sitename+'',
+  })
+};
+
+/////////////////////////////////
+/////  css      ///// 
+///////////////////////////////
+exports.css = function(req, res) {
+  res.render('../../../views/css',{
+    pagetitle: 'CSS Management | '+sitename+'',
+  })
+};
+
