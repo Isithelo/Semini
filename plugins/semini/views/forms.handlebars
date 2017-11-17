@@ -1,22 +1,10 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-10">
     <h1>Forms</h1>
     <p>Create and modify site forms using the Semini Primer and Raw forms. A structured form creation system allows for the development of structured site data.</p>
   </div>
-
-  {{#if user}}
-  <div class="col-md-4" style="text-align: right">
-    <div class="btn-group">
-      <button type="button" class="btn btn-default btn-xs dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-cogs" aria-hidden="true"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-right">
-       <li><a href="#" data-toggle="modal" data-target="#myModal" onclick="newMenuItem()" title="Add items"><i class="fa fa-plus" aria-hidden="true"></i>  Add Item</a></li>
-       <li> <a href="#" data-toggle="modal" data-target="#myModal" onclick="editRaw()" title="Edit this item raw"><i class="fa fa-file-code-o" aria-hidden="true"></i>  Edit Raw</a></li>
-     </ul>
-   </div>
- </div>  
- {{/if}}
+{{>tools}}  
+ 
 
 
 </div>  <hr>
@@ -25,7 +13,7 @@
     <div id="myProgress">
       <div id="myBar"> </div>
     </div>
-    <h5><strong>Navigation</strong><small>Use the navigation tree to interact with the database.</small></h5>
+    <h5><strong>Navigation</strong> <small>  Use the navigation tree to interact with the database.</small><div style="text-align: right;position: absolute;right: 14px;top:0px" id="treeNavEdit" ></div> </h5>
     <div class=" ">
      <div style="padding-bottom:15px;padding-bottom:15px">
       <input id="search_field" name="searchinput" type="search" placeholder="Search Navigation" class="form-control input-md">      
@@ -41,7 +29,7 @@
   </div>
 </div>
 </div>
-
+ 
 <script type="text/javascript">
 
   var databaseid = {{{items}}};
@@ -49,6 +37,8 @@
   var navmenuHeadings = ['detail','description','icon','buttons','tabs','parent','template','value']
   var databaseMenu = []
   var temp =[]
+
+
 
 /////////////////////////////
 ////     DEBUG AREA     //// 
@@ -111,6 +101,7 @@ function fitstFormat(databaseMenu){
 //////  INITIALISE    //////
 /////////////////////////// 
 $( document ).ready(function() {
+  pageNavEdit(databaseid)
   jstreeGet(databaseid)
 });
 
@@ -265,6 +256,7 @@ if(ids){
    'success': function (dataSchemaObject) {
      jQuery('#panel').html("")
      jQuery('#panel').html(dataSchemaObject)
+     treeNavEdit("treeNavEdit")
    }
  });
 }

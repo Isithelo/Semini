@@ -119,3 +119,13 @@ progressBar.animate(1.0, {
     $('#headerload').html('')
 });
 </script>
+
+{{#if user}}
+
+
+
+<script type="text/javascript">
+ var user = JSON.parse(JSON.stringify('{{user.permission}}'))
+ 
+</script>
+{{/if}}

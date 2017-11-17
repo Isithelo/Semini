@@ -13,6 +13,22 @@ var gateway = braintree.connect({
   privateKey: process.env.PRIVATEKEY
 });
 
+
+/////////////////////////////////
+////       DEBUGGING        //// 
+///////////////////////////////
+var debugMode = true
+function debugging(req,query){
+  if (query) {
+    console.log()
+    console.log('----------  DEBUGGING  ----------')
+    console.log('Directory Name : '+__dirname)
+    console.log('Original req URL : '+req.originalUrl)
+    console.log('----------  DEBUGGING  ----------')
+    console.log()
+  }
+}
+
 ///////////////////////////////////////////////
 ////     SET YOUR APP.JSON DETAILS        //// 
 /////////////////////////////////////////////
@@ -26,6 +42,7 @@ var repo = myModule.repo
 /////  FORMS | CREATE AND VIEW    ///// 
 //////////////////////////////////////
 exports.forms = function(req, res) {
+  debugging(req,res)
   //Determine how many forms exist on the server.
   var query1 = formModel.find().limit(6)
   query1.exec(function (err, results) {
